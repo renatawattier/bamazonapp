@@ -38,15 +38,20 @@ connection.query("SELECT * FROM  product", function(err, result){
         for (var i = 0; i < result.length; i++){
            if (result[i].id == answers.Q1) {
             //    console.log(result[i]);
+            console.log(result[i].stock_quantity)
                if (result[i].stock_quantity >= answers.Q2){
-                   console.log("there is enough in stock");
+                   console.log("We enough items in stock for your purchase");
                     //subtract from stock and update quantity from mysql
                     var newStockQuantity = result[i].stock_quantity - answers.Q2
-                    connection.query ("UPDATE products SET ?  WHERE ?",[{stock_quantity: newStockQuantity},{id: answers.Q1}] , function(err, result){
-                        console.log(result)
-                    } )
-
-                // console.log("Congratulation your purchase was completed, your total order cost was: " + " ")
+                    console.log(newStockQuantity)
+                    connection.query('UPDATE product SET stock_quantity = ? WHERE id = ?', [parseFloat(newStockQuantity), answers.Q1], function (err, result, fields) {
+                        if (err) throw err;
+                        // if err console.log(result)
+                        connection.end();
+                        console.log("Congratulation your purchase was completed, your total order cost was: " + (price + stock_quantity))
+                    });
+                    // console.log(result[i].stock_quantity)
+                // console.log("Congratulation your purchase was completed, your total order cost was: " + (price + stock_quantity))
 
                }
                else{
@@ -65,5 +70,3 @@ connection.query("SELECT * FROM  product", function(err, result){
 
 
 
-
-connection.end();
