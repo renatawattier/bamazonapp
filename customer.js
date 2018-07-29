@@ -48,10 +48,10 @@ connection.query("SELECT * FROM  product", function(err, result){
                         if (err) throw err;
                         // if err console.log(result)
                         connection.end();
-                        console.log("Congratulation your purchase was completed, your total order cost was: " + (price + stock_quantity))
+                        
                     });
                     // console.log(result[i].stock_quantity)
-                // console.log("Congratulation your purchase was completed, your total order cost was: " + (price + stock_quantity))
+                console.log("Congratulation your purchase was completed, your total order cost was: " + (result[i].price * answers.Q2))
 
                }
                else{
