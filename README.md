@@ -1,1 +1,1 @@
-# bamazonapp
+This application was created to pull information from a MySQL database and display on node.js. This application can show how many items are in stock and complete the purchase of the items if there is enough in stock.
